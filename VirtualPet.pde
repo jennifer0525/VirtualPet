@@ -1,8 +1,18 @@
+import processing.serial.*;
+import cc.arduino.*;
+Arduino arduino;
+
 void setup () {
   size(500,500);
-  background(69,75,27);
+  arduino = new Arduino(this, Arduino.list()[1],57600);
 }
 void draw () {
+  background(69,75,27);
+  
+  //arduino
+  int x = arduino.analogRead(5);
+  System.out.println(x);
+  
   //ears
   fill(0,0,0);
   ellipse(300,150,50,50);
@@ -10,7 +20,7 @@ void draw () {
   
   //body
   fill(255,255,255);
-  ellipse(250,320,160,200);
+  ellipse(250*x,320,160,200);
   
   //head
   fill(255,255,255);
@@ -18,12 +28,12 @@ void draw () {
   
   //feet
   fill(0,0,0);
-  ellipse(200,380,60,80);
-  ellipse(300,380,60,80);
+  ellipse(200*x,380,60,80);
+  ellipse(300*x,380,60,80);
   
   //hands
-  ellipse(200,300,35,50);
-  ellipse(300,300,35,50);
+  ellipse(200*x,300,35,50);
+  ellipse(300*x,300,35,50);
   
   //outer layer eyes
   ellipse(220,200,30,40);
@@ -41,4 +51,5 @@ void draw () {
  
  // nose
  ellipse(250,220,35,20);
+
 }
